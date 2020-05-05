@@ -1,3 +1,5 @@
+
+<%@page import="com.Hospital_DB"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -40,31 +42,42 @@ hos_email varchar(45) -->
 		      <form id="form_hospital">
 			  <div class="form-group">  
 					<label>Hospital Name :</label>
-			    		<input type="hos_name" class="form-control" id="hos_name" placeholder="Hospital Name">
+			    		<input type="text" class="form-control" id="hos_name" name="hos_name" placeholder="Hospital Name">
 			  </div>
 			  <div class="form-group">  
 					<label>Hospital Address :</label>
-			    		<input type="hos_address" class="form-control" id="hos_address" placeholder="Hospital Address">
+			    		<input type="text" class="form-control" id="hos_address" name="hos_address" placeholder="Hospital Address">
 			  </div>
 			  <div class="form-group">  
 					<label>Hospital Contact Number :</label>
-			    		<input type="hos_phone" class="form-control" id="hos_phone" placeholder="Hospital Contact Number">
+			    		<input type="number" class="form-control" id="hos_phone" name="hos_phone" placeholder="Hospital Contact Number">
 			  </div>
 			  <div class="form-group">  
 					<label>Hospital Email :</label>
-			    		<input type="hos_email" class="form-control" id="hos_email" placeholder="Hospital email">
+			    		<input type="email" class="form-control" id="hos_email" name="hos_email" placeholder="Hospital email">
 			  </div>
 			  <input type="button" id="btnSave" value="Submit" class="btn btn-primary">
+			 
+			 <input type="hidden" id="hideHospitalSave" name="hideHospitalSave" value="" >
+			 
 			  <!-- <button type="submit" class="btn btn-primary">Submit</button>
 			   -->
 		</form>
     </div>
     
- 	 </div>
-  
-  
-  
+ 	 </div id="alertSuccess" class="alert alert-success">
+ 	 <%
+ 	 	out.print(session.getAttribute("statusMsg"));
+ 	 %>  
 	</div>
+	
+	 </div id="alertError" class="alert alert-danger">
+ 	 <%
+ 	 	Hospital_DB hos_db_obj = new Hospital_DB();
+ 	 	out.print(hos_db_obj.readHospital());
+ 	 %>  
+	</div>
+	
 </div>
     
     

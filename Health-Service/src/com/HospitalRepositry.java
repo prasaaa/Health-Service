@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.DoctorM;
+
 import model.HospitalModel;
 
 public class HospitalRepositry {
