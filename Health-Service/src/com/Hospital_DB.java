@@ -6,9 +6,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 
-
-
-
 public class Hospital_DB {
 	
 	public String output;
@@ -55,8 +52,8 @@ public class Hospital_DB {
 							String hos_id = Integer.toString(rs.getInt("hos_id"));
 							 String hos_name = rs.getString("hos_name");
 							 String hos_address = rs.getString("hos_address");
-							 String hos_phone = Double.toString(rs.getDouble("hos_phone")); 
-							 String hos_email = Double.toString(rs.getDouble("hos_email")); 
+							 String hos_phone = rs.getString("hos_phone"); 
+							 String hos_email = rs.getString("hos_email"); 
 								
 							 
 							// Add into the html table
@@ -120,10 +117,7 @@ public class Hospital_DB {
 			
 			
 			con.close();
-			
 		
-			
-			
 
 		} catch (Exception e) {
 			output = "Error while inserting the Hospital."; 
@@ -135,6 +129,93 @@ public class Hospital_DB {
 		return output;
 	}
 	
+	
+	
+	// to select specific Hospital from database
+		public String searchHospital(String hos_id) {
+			output = "";
+			
+			try {
+				con = DBConnection.connect();
+
+				if (con == null) {
+					return "Error while connecting to the database for reading.";
+				}
+
+				// Prepare the html table to be displayed
+				output = "<table border='1'><tr>" +
+						"<th>ID </th>" +
+						"<th>Hospital ID</th>" +
+						"<th>Hospital Name</th>"+ 
+						"<th>Hospital Address</th>" +
+						"<th>Hospital Phone</th>" +
+						"<th>Hospital Email</th>"+ 
+						"<th>Update</th>" +
+						"<th>Remove</th>" + 
+						"</tr>";
+
+				query = "select * from hospital_table where hos_id ="+hos_id;
+				preparedStmt = con.prepareStatement(query);
+				ResultSet rs = preparedStmt.executeQuery(query);
+
+				// iterate through the rows in the result set
+				while (rs.next()) {
+
+					String hos_id1 = Integer.toString(rs.getInt("hos_id"));
+					 String hos_name = rs.getString("hos_name");
+					 String hos_address = rs.getString("hos_address");
+					 String hos_phone = rs.getString("hos_phone"); 
+					 String hos_email = rs.getString("hos_email"); 
+						
+					 
+					// Add into the html table
+					 output += "<tr><td>" + hos_id1 + "</td>";
+					 output += "<td>" + hos_name + "</td>";
+					 output += "<td>" + hos_address + "</td>";
+					 output += "<td>" + hos_phone + "</td>";
+					 output += "<td>" + hos_email + "</td>";
+
+				}
+				con.close();
+
+				// Complete the html table
+				output += "</table>";
+
+			} catch (Exception e) {
+				output = "Error while reading the Hospital";
+				System.err.println(e.getMessage());
+			}
+			return output;
+		}
+	
+		
+		
+		public String deleteHospital(String hos_id) {
+			output = "";
+			try {
+				
+
+				con = DBConnection.connect();
+				if (con == null) {
+					return "Error while connecting to the database for Deleting.";
+				}
+				// create a prepared statement
+				query = "delete from hospital_table WHERE hos_id=?";
+				preparedStmt = con.prepareStatement(query);
+				// binding values
+				preparedStmt.setString(1, hos_id);
+				// execute the statement
+				preparedStmt.executeUpdate();
+				con.close();
+				
+				
+				output = " Deleted the Hospital."; 
+			} catch (Exception e) {
+				output = "Error while deleting the Hospital."; 
+				System.err.println(e.getMessage());
+			}
+			return output;
+		}
 }
 		
 

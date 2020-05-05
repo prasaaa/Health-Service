@@ -2,6 +2,38 @@
 <%@page import="com.Hospital_DB"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
+<!--     
+    /*hos_id int AI PK 
+			hos_name varchar(45) 
+			hos_address varchar(100) 
+			hos_phone varchar(20) 
+			hos_email varchar(45)*/ -->
+    
+    <%
+//Insert hospital---------------------------------
+if (request.getParameter("hos_id") != null)
+ {
+			 Hospital_DB hos_Obj = new Hospital_DB();
+			 String stsMsg = hos_Obj.insertHospital(request.getParameter("hos_name"),
+			 request.getParameter("hos_address"),
+			 request.getParameter("hos_phone"),
+			 request.getParameter("hos_email"));
+			 session.setAttribute("statusMsg", stsMsg);
+		 }
+//Delete hospital----------------------------------
+if (request.getParameter("hos_id") != null)
+	 {
+	Hospital_DB hos_Obj = new Hospital_DB();
+	 String stsMsg = hos_Obj.deleteHospital(request.getParameter("hos_id"));
+	 session.setAttribute("statusMsg", stsMsg);
+	 }
+%>
+    
+    
+    
+    
+    
 <!DOCTYPE html>
 <html>
 
