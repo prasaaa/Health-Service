@@ -119,10 +119,15 @@ public class Hospital_DB {
 			
 			
 			con.close();
+			
+			String newHospital = readHospital();
+			 output = "{\"status\":\"success\", \"data\": \"" +
+					 newHospital + "\"}"; 
 		
 
 		} catch (Exception e) {
-			output = "Error while inserting the Hospital."; 
+			output = "{\"status\":\"error\", \"data\"\"Error while inserting the Hospital.\"}";
+			//output = "Error while inserting the Hospital."; 
 			System.err.println(e.getMessage());
 			System.out.println("error insert" +e);
 			
@@ -182,6 +187,7 @@ public class Hospital_DB {
 
 				// Complete the html table
 				output += "</table>";
+				
 
 			} catch (Exception e) {
 				output = "Error while reading the Hospital";
@@ -211,7 +217,10 @@ public class Hospital_DB {
 				con.close();
 				
 				
-				output = " Deleted the Hospital."; 
+				//output = " Deleted the Hospital."; 
+				
+				String newHospital = readHospital();
+				 output = "{\"status\":\"success\", \"data\": \"" +newHospital + "\"}"; 
 			} catch (Exception e) {
 				output = "Error while deleting the Hospital."; 
 				System.err.println(e.getMessage());
@@ -250,10 +259,14 @@ public class Hospital_DB {
 				
 				con.close();
 				System.out.println("updated");
+				String newHospital = readHospital();
+				 output = "{\"status\":\"success\", \"data\": \"" +
+						 newHospital + "\"}"; 
 			
 
 			} catch (Exception e) {
-				output = "Error while Update the Hospital."; 
+				//output = "Error while Update the Hospital."; 
+				output = "{\"status\":\"error\", \"data\":\"Error while updating the Hospital.\"}"; 
 				System.err.println(e.getMessage());
 				System.out.println("error update" +e);
 				

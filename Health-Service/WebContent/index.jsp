@@ -107,7 +107,7 @@ hos_address varchar(100)
 hos_phone varchar(20) 
 hos_email varchar(45) -->
 			  
-		      <form id="form_hospital">
+		      <form id="form_hospital" name="form_hospital">
 			  <div class="form-group">  
 					<label>Hospital Name :</label>
 			    		<input type="text" class="form-control" id="hos_name" name="hos_name" placeholder="Hospital Name">
