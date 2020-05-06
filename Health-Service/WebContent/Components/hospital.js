@@ -48,7 +48,32 @@ $(document).on("click", "#btnSave", function(event)
  // If valid-------------------------
  // $("#form_hospital").submit();
  });
-
+function onHospitalSaveComplete(response, status)
+{
+if (status == "success"){
+		var resultSet = JSON.parse(response);
+		if (resultSet.status.trim() == "success"){
+			
+				$("#alertSuccess").text("Successfully saved.");
+				$("#alertSuccess").show();
+				$("#divDoGrid").html(resultSet.data);
+		} else if (resultSet.status.trim() == "error"){
+			
+				$("#alertError").text(resultSet.data);
+					$("#alertError").show();
+		}
+ 		} else if (status == "error")
+ 		{
+ 				$("#alertError").text("Error while saving.");
+ 					$("#alertError").show();
+ 		} else
+ 		{
+ 			$("#alertError").text("Unknown error while saving..");
+ 			$("#alertError").show();
+ 		}
+			$("#hidHospitalIDSave").val("");
+			$("#form_hospital")[0].reset();
+}
 
 
 
