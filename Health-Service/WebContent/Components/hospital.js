@@ -40,7 +40,7 @@ var hospital = getHospitalCard($("#hos_id").val().trim(),
 		$("#hos_name").val().trim(),
 		$("#hos_address").val().trim(),
 		$("#hos_phone").val().trim(),
-		$("#hos_email").val().trim(),
+		$("#hos_email").val());
 
 $("#colHospital").append(hospital);
 
@@ -93,16 +93,16 @@ function getHospitalCard(hos_name, hos_address, hos_phone,hos_email)
 
 
 var hospital = "";
-hospital += "<div class=\"hospital card bg-light m-2\"
- style=\"max-width: 10rem; float: left;\">";
+hospital += "<div class=\"hospital card bg-light m-2\
+			style=\"max-width: 10rem; float: left;\">";
 hospital += "<div class=\"card-body\">";
 hospital += hos_name + " " + hos_address + " " + hos_phone + " ,";
 hospital += "<br>";
 hospital += hos_email + " hos_email";
 hospital += "</div>";
-hospital += "<input type=\"button\" value=\"Remove\"
- class=\"btn btn-danger remove\">";
+hospital += "<input type=\"button\" value=\"Remove\
+			class=\"btn btn-danger remove\">";
 hospital += "</div>";
-return hospital;
-}
-
+	return hospital;
+	}
+	
