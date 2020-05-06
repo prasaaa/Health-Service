@@ -10,7 +10,7 @@
 			hos_phone varchar(20) 
 			hos_email varchar(45)*/ -->
     
-    <%
+<%--     <%
 //Insert hospital---------------------------------
 if (request.getParameter("hos_id") != null)
  {
@@ -28,12 +28,48 @@ if (request.getParameter("hos_id") != null)
 	 String stsMsg = hos_Obj.deleteHospital(request.getParameter("hos_id"));
 	 session.setAttribute("statusMsg", stsMsg);
 	 }
-%>
+%> --%>
+
+<%//Save---------------------------------
+if (request.getParameter("hos_id") != null)
+{
+	Hospital_DB hos_Obj = new Hospital_DB();
+ String stsMsg = "";
+//Insert--------------------------
+if (request.getParameter("hideHospitalSave") == "")
+ {
+	stsMsg = hos_Obj.insertHospital(request.getParameter("hos_name"),
+				 request.getParameter("hos_address"),
+			 	 request.getParameter("hos_phone"),
+			 	 request.getParameter("hos_email"));
+ }
+else//Update----------------------
+ {
+	if(request.getParameter("hideHospitalSave") == ""){
+		
+	
+	 stsMsg = hos_Obj.updateHospital(request.getParameter("hos_name"),
+	 request.getParameter("hos_address"),
+	 request.getParameter("hos_phone"),
+	 request.getParameter("hos_email"),
+	 request.getParameter("hos_id"));
+	}
+ }
+ session.setAttribute("statusMsg", stsMsg);
+}
+//Delete-----------------------------
+if (request.getParameter("hidHospitalDelete") != null)
+{
+	Hospital_DB hos_Obj = new Hospital_DB();
+ 	String stsMsg =
+		 hos_Obj.deleteHospital(request.getParameter("hidHospitalDelete"));
+ session.setAttribute("statusMsg", stsMsg);
+}
     
     
     
     
-    
+    %>
 <!DOCTYPE html>
 <html>
 

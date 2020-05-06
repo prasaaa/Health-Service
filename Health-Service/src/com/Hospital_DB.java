@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 
+
+
 public class Hospital_DB {
 	
 	public String output;
@@ -216,6 +218,51 @@ public class Hospital_DB {
 			}
 			return output;
 		}
+		
+		
+		
+		public String updateHospital(String hos_name, String hos_address, String hos_phone, String hos_email,String hos_id) {
+
+			output = "";
+			try {
+				con = DBConnection.connect();
+
+				if (con == null) {
+					return "Error while connecting to the database for Updating.";
+				}
+				
+
+				// create a prepared statement
+				query = "update hospital_table SET hos_name=?,hos_address=?,hos_phone=?,hos_email=? WHERE hos_id=?";
+
+				preparedStmt = con.prepareStatement(query);
+				// binding values
+				preparedStmt.setString(1, hos_name);
+				preparedStmt.setString(2, hos_address);
+				preparedStmt.setString(3, hos_phone);
+				preparedStmt.setString(4, hos_email);
+				preparedStmt.setString(5, hos_id);
+				
+				// execute the statement
+				preparedStmt.executeUpdate();
+
+						
+				
+				con.close();
+				System.out.println("updated");
+			
+
+			} catch (Exception e) {
+				output = "Error while Update the Hospital."; 
+				System.err.println(e.getMessage());
+				System.out.println("error update" +e);
+				
+			}
+			System.out.println(output);
+			return output;
+
+		}	
+		
 }
 		
 

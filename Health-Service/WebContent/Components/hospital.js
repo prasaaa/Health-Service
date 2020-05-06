@@ -9,49 +9,51 @@ $(document).ready(function()
 }); 
 //page refresh
 
-/*hos_id int AI PK 
-hos_name varchar(45) 
-hos_address varchar(100) 
-hos_phone varchar(20) 
-hos_email varchar(45)*/
+
+
 
 //SAVE ============================================
 $(document).on("click", "#btnSave", function(event)
 {
-// Clear status msges-------------
+// Clear alerts---------------------
  $("#alertSuccess").text("");
  $("#alertSuccess").hide();
  $("#alertError").text("");
- $("#alertError").hide();
-// Form validation----------------
-var status = validateItemForm();
-// If not valid-------------------
-if (status != true)
- {
- $("#alertError").text(status);
- $("#alertError").show();
- return;
- }
+ $("#alertError").hide(); 
+ 
+//Form validation-------------------
+ var status = validateItemForm();
+ if (status != true)
+  {
+  $("#alertError").text(status);
+  $("#alertError").show();
+  return;
+  }
+ // If valid-------------------------
+  $("#form_hospital").submit();
+ });
 
 
 
-//If valid
-var hospital = getHospitalCard($("#hos_id").val().trim(),
-		$("#hos_name").val().trim(),
-		$("#hos_address").val().trim(),
-		$("#hos_phone").val().trim(),
-		$("#hos_email").val());
-
-$("#colHospital").append(hospital);
 
 
-
- $("#alertSuccess").text("Saved successfully.");
- $("#alertSuccess").show();
-
- $("#form_hospital")[0].reset();
+//UPDATE==========================================
+$(document).on("click", ".btnUpdate", function(event)
+{
+ $("#hideHospitalSave").val($(this).closest("tr").find('#hidhospitalIDUpdate').val());
+ $("#hos_id").val($(this).closest("tr").find('td:eq(0)').text());
+ $("#hos_name").val($(this).closest("tr").find('td:eq(1)').text());
+ $("#hos_address").val($(this).closest("tr").find('td:eq(2)').text());
+ $("#hos_phone").val($(this).closest("tr").find('td:eq(3)').text());
+ $("#hos_email").val($(this).closest("tr").find('td:eq(4)').text());
 });
-// REMOVE==========================================
+
+
+
+
+
+
+// DELETE==========================================
 $(document).on("click", ".remove", function(event)
 {
  $(this).closest(".hospital").remove();
@@ -59,6 +61,8 @@ $(document).on("click", ".remove", function(event)
  $("#alertSuccess").text("Removed successfully.");
  $("#alertSuccess").show();
 });
+
+
 
 
 //CLIENT-MODEL=================================================================
